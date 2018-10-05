@@ -1,0 +1,46 @@
+var x = [];
+var y = [];
+var r = [];
+var upSpeed = [];
+
+
+function setup() {
+  createCanvas(400, 400);
+  colorMode(RGB);
+
+  for (i = 0; i < 15; i = i + 1) {
+    append(x, random(180, 200));
+    append(y, random(160, 230));
+    append(upSpeed, random(5.0, 8.0));
+    append(r, random(0.2, 10));
+  }
+
+}
+
+function draw() {
+  background(0);
+  noStroke();
+
+  // draw smokestack
+  fill(x-100,y-100,x);
+  rect(185, height, 50, -100);
+
+  // darker as it gets closer to 0
+  for (var i = 0; i < x.length; i++) {
+
+    push();
+    fill(x, 0, y-100);
+    translate(x[i], y[i]);
+    rotate(r);
+    rect(10, 60, 30, 30);
+    pop();
+
+    y[i] -= upSpeed[i];
+
+  
+
+    if (y[i] < -70) {
+      y[i] = random(190, 220);
+    }
+}
+}
